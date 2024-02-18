@@ -17,4 +17,7 @@ public class CalculatorFunctions {
         }
         return a / b;
     }
+    public int modulous(int a , int b) {
+        return a % b; //new code added
+    }
 }
