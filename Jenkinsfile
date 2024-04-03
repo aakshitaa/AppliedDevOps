@@ -9,44 +9,48 @@ pipeline {
             }
         }
         
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
+                // Install backend dependencies
+                sh 'cd server && npm install'
+                
+                // Install frontend dependencies
+                sh 'cd client && npm install'
             }
         }
         
-    //     stage('Test') {
-    //         steps {
-    //             // Run tests
-    //             sh 'mvn test'
-    //         }
-    //     }
+        stage('Build') {
+            steps {
+                // Build the frontend
+                sh 'cd client && npm run build'
+            }
+        }
         
-    //     stage('Deploy') {
-    //         steps {
-    //             // Deploy the application (e.g., to a server)
-    //             sh 'ssh user@server "deploy-script.sh"'
-    //         }
-    //     }
-    // }
+        // stage('Test') {
+        //     steps {
+        //         // Run backend tests (if any)
+        //         sh 'cd server && npm test'
+        //     }
+        // }
+        
+        // stage('Deploy') {
+        //     steps {
+        //         // Deploy the application (e.g., to a server)
+        //         // You can use any deployment method here, such as Docker, Heroku, AWS, etc.
+        //         // For example, deploying to a server using SSH
+        //         sh 'ssh user@server "deploy-script.sh"'
+        //     }
+        // }
+    }
     
     post {
         success {
             // If the build is successful, send a notification
-            echo 'Build successful! Sending email notification...'
-            emailext (
-                subject: 'Build Successful',
-                body: 'Your build passed successfully.',
-                to: 'user@example.com'
-            )
+            echo 'Build successful!'
         }
         failure {
             // If the build fails, send a notification
-            echo 'Build failed! Sending email notification...'
-            emailext (
-                subject: 'Build Failed',
-                body: 'Your build failed.',
-                to: 'user@example.com'
-            )
+            echo 'Build failed!'
         }
     }
 }
