@@ -10,17 +10,14 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'cd server && npm install'
-                
-                // Install frontend dependencies
-                sh 'cd client && npm install'
+                sh 'cd Lost-And-Found-WebApp && npm install'
             }
         }
         
         stage('Build') {
             steps {
                 // Build the frontend
-                sh 'cd client && npm run build'
+                sh 'cd Lost-And-Found-WebApp && npm run build'
             }
         }
         
