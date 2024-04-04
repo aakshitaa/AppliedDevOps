@@ -4,28 +4,28 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-               sh 'rm -rf AppliedDevOps'
-               sh 'git clone https://github.com/aakshitaa/AppliedDevOps.git'
+               bat 'rmdir /s /q AppliedDevOps'
+               bat 'git clone https://github.com/aakshitaa/AppliedDevOps.git'
             }
         }
         
         stage('Install Dependencies') {
             steps {
-                sh 'cd Lost-And-Found-WebApp && npm install'
+                bat 'cd Lost-And-Found-WebApp && npm install'
             }
         }
         
         stage('Build') {
             steps {
                 // Build the frontend
-                sh 'cd Lost-And-Found-WebApp && npm run build'
+                bat 'cd Lost-And-Found-WebApp && npm run build'
             }
         }
         
         // stage('Test') {
         //     steps {
         //         // Run backend tests (if any)
-        //         sh 'cd server && npm test'
+        //         bat 'cd server && npm test'
         //     }
         // }
         
@@ -34,7 +34,7 @@ pipeline {
         //         // Deploy the application (e.g., to a server)
         //         // You can use any deployment method here, such as Docker, Heroku, AWS, etc.
         //         // For example, deploying to a server using SSH
-        //         sh 'ssh user@server "deploy-script.sh"'
+        //         bat 'ssh user@server "deploy-script.sh"'
         //     }
         // }
     }
