@@ -33,12 +33,12 @@ const Footer = () => {
               <p>Help Us Find</p>
             </a>
           </div>
-          <div className="sb__footer-links_div">
+          {/* <div className="sb__footer-links_div">
             <h4>Partners</h4>
             <a href="/about">
               <a href="https://upes-open.org/"> <p>UPES Open Community</p></a>
             </a>
-          </div>
+          </div> */}
           <div className="sb__footer-links_div">
             <h4>Feedback</h4>
             <a href="/resources">
@@ -51,7 +51,7 @@ const Footer = () => {
               <a href='https://www.upes.ac.in/'><p>Visit Us</p></a> 
             </a>
           </div>
-          <div className="sb__footer-links_div">
+          {/* <div className="sb__footer-links_div">
             <h4>Social</h4>
             <div className='socialmedia'>
             <a href="https://www.instagram.com/upes_dehradun/"><p><img src={fb} alt="instaimage"/></p></a>
@@ -59,7 +59,7 @@ const Footer = () => {
             <a href="https://www.facebook.com/UPESddnuk/"><p><img src={insta} alt="fbimage"/></p></a>
             <a href="https://www.linkedin.com/company/open-community/"><p><img src={linkedin} alt="linkedinimage"/></p></a>
             </div>
-          </div>
+          </div> */}
         </div>
         <hr></hr>
 

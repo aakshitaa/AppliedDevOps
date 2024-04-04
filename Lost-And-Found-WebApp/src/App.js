@@ -78,21 +78,21 @@ const App = () => {
           (<>
             <Navbar toggleTheme={toggleTheme} theme={theme} />
             <Routes>
-              <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="/login" element={<Login theme={theme} />} />
+              <Route path="/" element={<Navigate to="/home" />} />
+              {/* <Route path="/login" element={<Login theme={theme} />} /> */}
               {/* Non-protected routes */}
               <Route path="/about" element={<AboutUs theme={theme} />} />
               <Route path="/faq" element={<Faq theme={theme} />} />
 
               {/* Protected routes */}
-              <Route path="/home" element={<ProtectedRoute><Home theme={theme} /></ProtectedRoute>} />
-              <Route path="/lost" element={<ProtectedRoute><LostUpload theme={theme} /></ProtectedRoute>} />
-              <Route path="/found" element={<ProtectedRoute><FoundUpload theme={theme} /></ProtectedRoute>} />
-              <Route path="/feedback" element={<ProtectedRoute><FeedbackForm theme={theme} /></ProtectedRoute>} />
-              <Route path="/items" element={<ProtectedRoute><CategorySelection theme={theme} /></ProtectedRoute>} />
-              <Route path="/items/:category" element={<ProtectedRoute><ItemGallery func={showConfirm} theme={theme} /></ProtectedRoute>} />
-              <Route path="/details/:id" element={<ProtectedRoute><ItemDetails func={showConfirm} theme={theme} /></ProtectedRoute>} />
-              <Route path="/helpusfind" element={<ProtectedRoute><HelpUs theme={theme} /></ProtectedRoute>} />
+              <Route path="/home" element={<Home theme={theme} />} />
+              <Route path="/lost" element={<LostUpload theme={theme} />} />
+              <Route path="/found" element={ <FoundUpload theme={theme} /> } />
+              <Route path="/feedback" element={ <FeedbackForm theme={theme} /> } />
+              <Route path="/items" element={ <CategorySelection theme={theme} /> } />
+              <Route path="/items/:category" element={ <ItemGallery func={showConfirm} theme={theme} /> } />
+              <Route path="/details/:id" element={ <ItemDetails func={showConfirm} theme={theme} /> } />
+              <Route path="/helpusfind" element={ <HelpUs theme={theme} /> } />
 
               {/* Sign-out route */}
               <Route path="/signout" element={<SignOut />} />
