@@ -4,14 +4,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the source code from version control
                 git 'https://github.com/aakshitaa/AppliedDevOps'
             }
         }
         
         stage('Install Dependencies') {
             steps {
-                // Install backend dependencies
                 sh 'cd server && npm install'
                 
                 // Install frontend dependencies
