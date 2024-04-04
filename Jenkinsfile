@@ -6,7 +6,6 @@ pipeline {
             steps {
                sh 'rm -rf AppliedDevOps'
                sh 'git clone https://github.com/aakshitaa/AppliedDevOps.git'
-               sh 'cd Lost-And-Found-WebApp && npm cache clean'
             }
         }
         
