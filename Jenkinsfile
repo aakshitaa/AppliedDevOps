@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/aakshitaa/AppliedDevOps'
+                git 'https://github.com/aakshitaa/AppliedDevOps.git'
             }
         }
         
