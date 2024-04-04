@@ -1,9 +1,9 @@
 import React from 'react';
 import "./Footer.css";
-import fb from "../images/insta-logo.png";
-import twitter from "../images/twitter-logo.png";
-import insta from "../images/facebook-logo.png";
-import linkedin from "../images/linkedin-logo.png"
+// import fb from "../images/insta-logo.png";
+// import twitter from "../images/twitter-logo.png";
+// import insta from "../images/facebook-logo.png";
+// import linkedin from "../images/linkedin-logo.png"
 const Footer = () => {
   return (
     <div className="footer">

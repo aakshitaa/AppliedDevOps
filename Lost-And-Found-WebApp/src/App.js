@@ -11,10 +11,10 @@ import FoundUpload from './found-item-details-page/FoundUpload';
 import ItemDetails from "./item-gallery-details/ItemDetails";
 import ItemGallery from "./items-gallery/ItemGallery";
 import CategorySelection from "./items-gallery/CategorySelection";
-import Login from "./login-page/Login";
+// import Login from "./login-page/Login";
 import Faq from "./faq/Faq";
 import Footer from "../src/Footer/Footer";
-import ProtectedRoute from './ProtectedRoute'; // Import the refactored ProtectedRoute component
+// import ProtectedRoute from './ProtectedRoute'; // Import the refactored ProtectedRoute component
 import Confirm from './confirmation_page/Confirm';
 
 import { MsalProvider, useMsal } from "@azure/msal-react";
