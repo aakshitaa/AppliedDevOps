@@ -23,16 +23,16 @@ pipeline {
         
         stage('Deploy to Nexus') {
             steps {
-                nexusArtifactUploader(
-                    nexusVersion: 'nexus3',
-                    protocol: 'http',
-                    nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
-                    groupId: 'com.example',
-                    version: '1.0.0',
-                    repository: 'Applied_DevOps_Project',
-                    file: 'Lost-And-Found-WebApp/build/', // Adjust this path based on your project structure
-                    credentialsId: 'nexus-credentials'
-                )
+               nexusArtifactUploader(
+    nexusVersion: 'nexus3',
+    protocol: 'http',
+    nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
+    groupId: 'com.example',
+    artifactId: 'Lost-And-Found-WebApp',
+    version: '1.0.0',
+    repository: 'Applied_DevOps_Project',
+    credentialsId: 'nexus-credentials'
+      )
             }
         }
     }
