@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-               bat 'rmdir /s /q AppliedDevOps'
-               bat 'git clone https://github.com/aakshitaa/AppliedDevOps.git'
+                bat 'rmdir /s /q AppliedDevOps'
+                bat 'git clone https://github.com/aakshitaa/AppliedDevOps.git'
             }
         }
         
@@ -17,36 +17,51 @@ pipeline {
         
         stage('Build') {
             steps {
-                // Build the frontend
                 bat 'cd Lost-And-Found-WebApp && npm run build'
             }
         }
         
-        // stage('Test') {
-        //     steps {
-        //         // Run backend tests (if any)
-        //         bat 'cd server && npm test'
-        //     }
-        // }
-        
-        // stage('Deploy') {
-        //     steps {
-        //         // Deploy the application (e.g., to a server)
-        //         // You can use any deployment method here, such as Docker, Heroku, AWS, etc.
-        //         // For example, deploying to a server using SSH
-        //         bat 'ssh user@server "deploy-script.sh"'
-        //     }
-        // }
+        stage('Deploy to Nexus') {
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
+                    groupId: 'com.example',
+                    version: '1.0.0',
+                    repository: 'Applied_DevOps_Project',
+                    file: 'Lost-And-Found-WebApp/build/', // Adjust this path based on your project structure
+                    credentialsId: 'nexus-credentials'
+                )
+            }
+        }
     }
-    
+
     post {
         success {
-            // If the build is successful, send a notification
             echo 'Build successful!'
         }
         failure {
-            // If the build fails, send a notification
             echo 'Build failed!'
         }
     }
 }
+
+
+    // stage('Build Image') {
+    //   steps {
+    //     // Login to Docker Hub (requires credentials setup in Jenkins)
+    //   bat 'docker login -u ${env.3d9ee0eb-3601-4ebf-9c9d-e167b8366908} -p ${env.3d9ee0eb-3601-4ebf-9c9d-e167b8366908}'
+
+    //     // Build the image based on Dockerfile location (replace 'lost-and-found-web-app' with your actual location)
+    //     bat 'docker build -t aakshita/lost-and-found-web-app:latest ./lost-and-found-web-app'
+    //   }
+    // }
+
+    // stage('Push Image') {
+    //   steps {
+    //     // Push the image to Docker Hub
+    //     bat 'docker push aakshita/lost-and-found-web-app:latest'
+    //   }
+    // }
+ 
