@@ -21,24 +21,20 @@ pipeline {
             }
         }
         
-     stage('Deploy to Nexus') {
-    steps {
-        nexusArtifactUploader {
-            nexusVersion('nexus3')
-            protocol('http')
-            nexusUrl('http://localhost:8081/repository/Applied_DevOps_Project/')
-            groupId('com.example')
-            version('1.0.0')
-            repository('Applied_DevOps_Project')
-            credentialsId('nexus-credentials')
-            artifact {
-                artifactId('Lost-And-Found-WebApp')
-                file('Lost-And-Found-WebApp/build')
+        stage('Deploy to Nexus') {
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
+                    groupId: 'com.example',
+                    artifactId: 'Lost-And-Found-WebApp',
+                    version: '1.0.0',
+                    repository: 'Applied_DevOps_Project',
+                    credentialsId: 'nexus-credentials'
+                )
             }
         }
-       }
-    }
-
     }
 
     post {
@@ -50,22 +46,3 @@ pipeline {
         }
     }
 }
-
-
-    // stage('Build Image') {
-    //   steps {
-    //     // Login to Docker Hub (requires credentials setup in Jenkins)
-    //   bat 'docker login -u ${env.3d9ee0eb-3601-4ebf-9c9d-e167b8366908} -p ${env.3d9ee0eb-3601-4ebf-9c9d-e167b8366908}'
-
-    //     // Build the image based on Dockerfile location (replace 'lost-and-found-web-app' with your actual location)
-    //     bat 'docker build -t aakshita/lost-and-found-web-app:latest ./lost-and-found-web-app'
-    //   }
-    // }
-
-    // stage('Push Image') {
-    //   steps {
-    //     // Push the image to Docker Hub
-    //     bat 'docker push aakshita/lost-and-found-web-app:latest'
-    //   }
-    // }
- 
