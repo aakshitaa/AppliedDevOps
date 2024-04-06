@@ -36,7 +36,7 @@ pipeline {
             steps {
                 // Publish npm package to Nexus
                 withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-                    sh "npm publish --registry=http://localhost:8081/repository/AppliedDevOpsRepo/ --user=${NEXUS_USERNAME} --password=${NEXUS_PASSWORD}"
+                    bat "npm publish --registry=http://localhost:8081/repository/AppliedDevOpsRepo/ --user=${NEXUS_USERNAME} --password=${NEXUS_PASSWORD}"
                 }
             }
         }
