@@ -20,17 +20,19 @@ pipeline {
                 bat 'cd Lost-And-Found-WebApp && npm run build'
             }
         }
-       stage('Serve Build Files') {
-    steps {
-        // Serve the build files using serve
-        bat '''
-            cd Lost-And-Found-WebApp
-            npm install -g serve
-            serve -s build
-        '''
-      }
-   }
-    stage('Publish to Nexus') {
+        
+        stage('Serve Build Files') {
+            steps {
+                // Serve the build files using serve
+                bat '''
+                    cd Lost-And-Found-WebApp
+                    npm install -g serve
+                    serve -s build
+                '''
+            }
+        }
+        
+        stage('Publish to Nexus') {
             steps {
                 // Publish npm package to Nexus
                 withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
@@ -38,7 +40,8 @@ pipeline {
                 }
             }
         }
-
+    }
+    
     post {
         success {
             echo 'Build successful!'
@@ -47,5 +50,4 @@ pipeline {
             echo 'Build failed!'
         }
     }
-}
 }
