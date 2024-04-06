@@ -35,16 +35,8 @@ pipeline {
       stage('Publish to Nexus') {
     steps {
         script {
-            def credentials = findCredentials(credentialsId: 'nexus-credentials')
-            def NPM_USER = credentials?.username
-            def NPM_PASS = credentials?.password
-
-            if (NPM_USER && NPM_PASS) {
                 // Publish npm package to Nexus
-                bat "npm publish --registry=http://localhost:8081/repository/AppliedDevOpsRepo/ --user=${NPM_USER} --password=${NPM_PASS}"
-            } else {
-                error "Failed to retrieve Nexus credentials"
-            }
+                bat "npm publish"
         }
     }
 }
