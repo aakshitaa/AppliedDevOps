@@ -31,15 +31,20 @@ pipeline {
                 '''
             }
         }
-       stage('Publish to Nexus') {
+      
+      stage('Publish to Nexus') {
     steps {
         script {
-            def nexusCredentials = credentials('nexus-credentials')
-            def NPM_USER = nexusCredentials.username
-            def NPM_PASS = nexusCredentials.password
+            def credentials = findCredentials(credentialsId: 'nexus-credentials')
+            def NPM_USER = credentials?.username
+            def NPM_PASS = credentials?.password
 
-            // Publish npm package to Nexus
-            bat "npm publish --registry=http://localhost:8081/repository/AppliedDevOpsRepo/ --user=${NPM_USER} --password=${NPM_PASS}"
+            if (NPM_USER && NPM_PASS) {
+                // Publish npm package to Nexus
+                bat "npm publish --registry=http://localhost:8081/repository/AppliedDevOpsRepo/ --user=${NPM_USER} --password=${NPM_PASS}"
+            } else {
+                error "Failed to retrieve Nexus credentials"
+            }
         }
     }
 }
