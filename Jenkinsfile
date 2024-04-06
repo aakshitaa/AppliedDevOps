@@ -21,21 +21,43 @@ pipeline {
             }
         }
         
-        stage('Deploy to Nexus') {
+        // stage('Deploy to Nexus') {
+        //     steps {
+        //         nexusArtifactUploader(
+        //             nexusVersion: 'nexus3',
+        //             protocol: 'http',
+        //             nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
+        //             groupId: 'com.example',
+        //             artifactId: 'Lost-And-Found-WebApp',
+        //             version: '1.0.0',
+        //             repository: 'Applied_DevOps_Project',
+        //             credentialsId: 'nexus-credentials'
+        //         )
+        //     }
             steps {
-                nexusArtifactUploader(
-                    nexusVersion: 'nexus3',
-                    protocol: 'http',
-                    nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
-                    groupId: 'com.example',
-                    artifactId: 'Lost-And-Found-WebApp',
-                    version: '1.0.0',
-                    repository: 'Applied_DevOps_Project',
-                    credentialsId: 'nexus-credentials'
-                )
-            }
+          nexusArtifactUploader {
+            nexusVersion('nexus2')
+            protocol('http')
+            nexusUrl('http://localhost:8081/repository/Applied_DevOps_Project/')
+            groupId('com.group1')
+            version('2.4')
+            repository('Applied_DevOps_Project')
+            credentialsId('nexus-credentials')
+            // artifact {
+            //     artifactId('nexus-artifact-uploader')
+            //     type('jar')
+            //     classifier('debug')
+            //     file('nexus-artifact-uploader.jar')
+            // }
+            // artifact {
+            //     artifactId('nexus-artifact-uploader')
+            //     type('hpi')
+            //     classifier('debug')
+            //     file('nexus-artifact-uploader.hpi')
+            // }
+          }
         }
-    }
+        }
 
     post {
         success {
