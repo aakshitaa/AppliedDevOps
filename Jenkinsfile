@@ -20,6 +20,20 @@ pipeline {
                 bat 'cd Lost-And-Found-WebApp && npm run build'
             }
         }
+        stage('Deploy to Nexus') {
+    steps {
+        nexusArtifactUploader(
+            nexusVersion: 'nexus2',
+            protocol: 'http',
+            nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
+            groupId: 'com.group1',
+            version: '2.4',
+            repository: 'Applied_DevOps_Project',
+            credentialsId: 'nexus-credentials'
+        )
+    }
+}
+
         
         // stage('Deploy to Nexus') {
         //     steps {
@@ -34,15 +48,15 @@ pipeline {
         //             credentialsId: 'nexus-credentials'
         //         )
         //     }
-            steps {
-          nexusArtifactUploader {
-            nexusVersion('nexus2')
-            protocol('http')
-            nexusUrl('http://localhost:8081/repository/Applied_DevOps_Project/')
-            groupId('com.group1')
-            version('2.4')
-            repository('Applied_DevOps_Project')
-            credentialsId('nexus-credentials')
+          //   steps {
+          // nexusArtifactUploader {
+          //   nexusVersion('nexus2')
+          //   protocol('http')
+          //   nexusUrl('http://localhost:8081/repository/Applied_DevOps_Project/')
+          //   groupId('com.group1')
+          //   version('2.4')
+          //   repository('Applied_DevOps_Project')
+          //   credentialsId('nexus-credentials')
             // artifact {
             //     artifactId('nexus-artifact-uploader')
             //     type('jar')
@@ -55,8 +69,8 @@ pipeline {
             //     classifier('debug')
             //     file('nexus-artifact-uploader.hpi')
             // }
-          }
-        }
+        //   }
+        // }
         }
 
     post {
