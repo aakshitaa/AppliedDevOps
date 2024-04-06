@@ -20,19 +20,30 @@ pipeline {
                 bat 'cd Lost-And-Found-WebApp && npm run build'
             }
         }
-        stage('Deploy to Nexus') {
+       stage('Serve Build Files') {
     steps {
-        nexusArtifactUploader(
-            nexusVersion: 'nexus2',
-            protocol: 'http',
-            nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
-            groupId: 'com.group1',
-            version: '2.4',
-            repository: 'Applied_DevOps_Project',
-            credentialsId: 'nexus-credentials'
-        )
+        // Serve the build files using serve
+        bat '''
+            cd Lost-And-Found-WebApp
+            npm install -g serve
+            serve -s build
+        '''
     }
 }
+
+//         stage('Deploy to Nexus') {
+//     steps {
+//         nexusArtifactUploader(
+//             nexusVersion: 'nexus2',
+//             protocol: 'http',
+//             nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
+//             groupId: 'com.group1',
+//             version: '2.4',
+//             repository: 'Applied_DevOps_Project',
+//             credentialsId: 'nexus-credentials'
+//         )
+//     }
+// }
 
         
         // stage('Deploy to Nexus') {
