@@ -33,13 +33,16 @@ pipeline {
         }
         
         stage('Publish to Nexus') {
-            steps {
-                // Publish npm package to Nexus
-                withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-                    bat "npm publish --registry=http://localhost:8081/repository/AppliedDevOpsRepo/ --user=${NEXUS_USERNAME} --password=${NEXUS_PASSWORD}"
-                }
-            }
+    environment {
+        NPM_USER = credentials('nexus-credentials').username
+        NPM_PASS = credentials('nexus-credentials').password
+    }
+    steps {
+        // Publish npm package to Nexus
+        bat "npm publish --registry=http://localhost:8081/repository/AppliedDevOpsRepo/ --user=%NPM_USER% --password=%NPM_PASS%"
         }
+    }
+
     }
     
     post {
