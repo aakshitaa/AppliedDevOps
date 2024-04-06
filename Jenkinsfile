@@ -28,60 +28,15 @@ pipeline {
             npm install -g serve
             serve -s build
         '''
-    }
-}
-
-//         stage('Deploy to Nexus') {
-//     steps {
-//         nexusArtifactUploader(
-//             nexusVersion: 'nexus2',
-//             protocol: 'http',
-//             nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
-//             groupId: 'com.group1',
-//             version: '2.4',
-//             repository: 'Applied_DevOps_Project',
-//             credentialsId: 'nexus-credentials'
-//         )
-//     }
-// }
-
-        
-        // stage('Deploy to Nexus') {
-        //     steps {
-        //         nexusArtifactUploader(
-        //             nexusVersion: 'nexus3',
-        //             protocol: 'http',
-        //             nexusUrl: 'http://localhost:8081/repository/Applied_DevOps_Project/',
-        //             groupId: 'com.example',
-        //             artifactId: 'Lost-And-Found-WebApp',
-        //             version: '1.0.0',
-        //             repository: 'Applied_DevOps_Project',
-        //             credentialsId: 'nexus-credentials'
-        //         )
-        //     }
-          //   steps {
-          // nexusArtifactUploader {
-          //   nexusVersion('nexus2')
-          //   protocol('http')
-          //   nexusUrl('http://localhost:8081/repository/Applied_DevOps_Project/')
-          //   groupId('com.group1')
-          //   version('2.4')
-          //   repository('Applied_DevOps_Project')
-          //   credentialsId('nexus-credentials')
-            // artifact {
-            //     artifactId('nexus-artifact-uploader')
-            //     type('jar')
-            //     classifier('debug')
-            //     file('nexus-artifact-uploader.jar')
-            // }
-            // artifact {
-            //     artifactId('nexus-artifact-uploader')
-            //     type('hpi')
-            //     classifier('debug')
-            //     file('nexus-artifact-uploader.hpi')
-            // }
-        //   }
-        // }
+      }
+   }
+    stage('Publish to Nexus') {
+            steps {
+                // Publish npm package to Nexus
+                withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    sh "npm publish --registry=http://localhost:8081/repository/AppliedDevOpsRepo/ --user=${NEXUS_USERNAME} --password=${NEXUS_PASSWORD}"
+                }
+            }
         }
 
     post {
