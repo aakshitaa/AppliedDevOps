@@ -36,7 +36,7 @@ pipeline {
     steps {
         script {
                 // Publish npm package to Nexus
-                bat "cd Lost-And-Found-WebApp && npm publish"
+                bat "cd Lost-And-Found-WebApp"
         }
     }
 }

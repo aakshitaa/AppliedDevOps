@@ -1,7 +1,7 @@
 {
   "name": "lost-and-found-webapp",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@azure/msal-browser": "^2.30.0",
     "@azure/msal-react": "^1.5.9",

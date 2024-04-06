@@ -17,13 +17,13 @@ spec:
           image: sonatype/nexus3
           ports:
             - containerPort: 8081
-      #     volumeMounts:
-      #       - name: nexus-data
-      #         mountPath: /nexus-data
-      # volumes:
-      #   - name: nexus-data
-      #     persistentVolumeClaim:
-      #       claimName: nexus-pvc
+          volumeMounts:
+            - name: nexus-data
+              mountPath: /nexus-data
+      volumes:
+        - name: nexus-data
+          persistentVolumeClaim:
+            claimName: myclaim
 ---
 apiVersion: v1
 kind: Service
